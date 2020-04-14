@@ -16,11 +16,13 @@
 
 function setup() {
     createCanvas(400, 400);
+    
     // create an engine
     engine = Engine.create();
-    world = Engine.world;
+    world = engine.world;
+
     //create a box (x, y, width, height)
-    
+    boxA = Bodies.rectangle(200, 100, 80, 80)
     Engine.run(engine);
     World.add(world, boxA);
 
