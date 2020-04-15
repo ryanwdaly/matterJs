@@ -5,15 +5,15 @@
         Bodies = Matter.Bodies;
 
     var engine;
-    var boxA;
+    var circleA;
     var world;
-    var boxes = [];
+    var circles = [];
+    var boundaries = [];
 
     var ground; 
 
 function setup() {
     createCanvas(800, 800);
-
     // create an engine
     engine = Engine.create();
     world = engine.world;
@@ -21,25 +21,27 @@ function setup() {
     var options = {
         isStatic: true
     }
+    boundaries.push(new Boundary(500, 200, width*0.6, 50, -0.3));
+    boundaries.push(new Boundary(200, 500, width*0.5, 50, 0.3));
 
-    ground = Bodies.rectangle(200, height - 50, width, 100, options);
-    World.add(world, ground);
+    // World.add(world, ground);
 }
 
-function mouseDragged() {
-    boxes.push(new Box(mouseX, mouseY, random(10, 40), random(10, 40)))
+function mousePressed() {
+    circles.push(new Circle(mouseX, mouseY, random(10, 40)))
 }
 
 
 function draw() {
     background(51);
-    for (var i = 0; i < boxes.length; i++) {
-        boxes[i].show();
+    Engine.update(engine) //physics system moves ahead moment in time
+    for (var i = 0; i < circles.length; i++) {
+        circles[i].show();
+    }
+    for (var i = 0; i < boundaries.length; i++) {
+        boundaries[i].show();
     }
     
-    noStroke(255);
-    fill(170);
-    rectMode(CENTER);
-    rect(ground.position.x, ground.position.y, width, 100);
+
     
 } 

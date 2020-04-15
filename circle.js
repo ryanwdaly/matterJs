@@ -21,7 +21,7 @@ function Circle(x, y, r) {
         strokeWeight(1);
         stroke(255);
         fill(127);
-        ellipse(0, 0, this.r);
+        ellipse(0, 0, this.r*2);
         pop();
         
     }

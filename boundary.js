@@ -1,13 +1,17 @@
-function Circle(x, y, r) {
+function Boundary(x, y, w, h, a) {
 
     var options = {
         friction: 0, 
-        restitution: 0.6
+        restitution: 0.6, 
+        isStatic: true, 
+        angle: a
     }
                 //create a box (x, y, width, height)
-    this.body = Bodies.circle(x, y, r, options);
-    this.r = r;
+    this.body = Bodies.rectangle(x, y, w, h, options);
+    console.log(this.body);
 
+    this.w = w;
+    this.h = h;
     World.add(world, this.body);
 
     this.show = function() {
@@ -19,9 +23,9 @@ function Circle(x, y, r) {
         rotate(angle);
         rectMode(CENTER);
         strokeWeight(1);
-        stroke(255);
-        fill(127);
-        ellipse(0, 0, this.r);
+        noStroke();
+        fill(0);
+        rect(0, 0, this.w, this.h);
         pop();
         
     }
