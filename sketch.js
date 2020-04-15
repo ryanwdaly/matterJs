@@ -7,31 +7,39 @@
     var engine;
     var boxA;
     var world;
+    var boxes = [];
 
-
- 
-
-
-
+    var ground; 
 
 function setup() {
-    createCanvas(400, 400);
-    
+    createCanvas(800, 800);
+
     // create an engine
     engine = Engine.create();
     world = engine.world;
-
-    //create a box (x, y, width, height)
-    boxA = Bodies.rectangle(200, 100, 80, 80)
     Engine.run(engine);
-    World.add(world, boxA);
+    var options = {
+        isStatic: true
+    }
 
-
-
+    ground = Bodies.rectangle(200, height - 50, width, 100, options);
+    World.add(world, ground);
 }
+
+function mouseDragged() {
+    boxes.push(new Box(mouseX, mouseY, random(10, 40), random(10, 40)))
+}
+
 
 function draw() {
     background(51);
+    for (var i = 0; i < boxes.length; i++) {
+        boxes[i].show();
+    }
     
-    rect(boxA.position.x, boxA.position.y, 80, 80)
+    noStroke(255);
+    fill(170);
+    rectMode(CENTER);
+    rect(ground.position.x, ground.position.y, width, 100);
+    
 } 
