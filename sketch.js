@@ -27,21 +27,27 @@ function setup() {
     // World.add(world, ground);
 }
 
-function mousePressed() {
-    circles.push(new Circle(mouseX, mouseY, random(10, 40)))
-}
+// function mousePressed() {
+//     circles.push(new Circle(mouseX, mouseY, random(10, 40)))
+// }
 
 
 function draw() {
     background(51);
+    circles.push(new Circle(600, 50, random(5, 20)))
     Engine.update(engine) //physics system moves ahead moment in time
     for (var i = 0; i < circles.length; i++) {
         circles[i].show();
+        if (circles[i].isOffScreen()) {
+            circles[i].removeFromWorld();
+            circles.splice(i, 1);
+            i--;
+        }
     }
     for (var i = 0; i < boundaries.length; i++) {
         boundaries[i].show();
     }
     
-
+    console.log(circles.length, world.bodies.length);
     
 } 
